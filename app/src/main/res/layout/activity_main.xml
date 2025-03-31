@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Main Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_layout"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Top Navigation Bar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/top_navigation"
+                android:gravity="center_vertical"
+                android:paddingBottom="10dp">
+
+                <!-- Search Bar -->
+                <EditText
+                    android:id="@+id/search_bar_top"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Search..."
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:padding="10dp"
+                    android:visibility="gone"
+                    android:background="@android:drawable/edit_text"
+                    android:layout_marginLeft="10dp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/search_bar_top_auto"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Search..."
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:padding="10dp"
+                    android:visibility="gone"
+                    android:background="@android:drawable/edit_text"
+                    android:layout_marginLeft="10dp"
+                    android:completionThreshold="1" />
+
+                <!-- Toggle Switch (Now on the Right of Search Bar) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/basic_icon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/basic_user"
+                        android:contentDescription="Basic" />
+
+                    <Switch
+                        android:id="@+id/gender_toggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp" />
+
+                    <ImageView
+                        android:id="@+id/premium_icon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/premium_user"
+                        android:contentDescription="Premium" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/premium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Premium Content"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:gravity="center" />
+
+            <!-- Top Banner (Full Width) -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/top_premium_banner"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You may also like"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:layout_marginTop="10dp"/>
+
+            <!-- "You May Also Like" Carousel (RecyclerView) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/circular_carousel"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:visibility="gone"
+                android:scrollbars="horizontal"/>
+
+            <TextView
+                android:id="@+id/new_addition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Additions"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:layout_marginTop="10dp"/>
+
+            <!-- "New Addition" Carousel (RecyclerView) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/new_addition_card"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:visibility="gone"
+                android:scrollbars="horizontal"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
