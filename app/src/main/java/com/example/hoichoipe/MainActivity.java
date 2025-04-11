@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -52,10 +53,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 topBanner;
     private Switch genderToggle;
     CleverTapAPI cleverTapAPI;
-    private Var<String> subTheme, newAddTheme;
+    private Var<String> subTheme, newAddTheme, userFlag, userAmt;
     private Var<String> premiumImages;
     private Var<Integer> premiumImagesCnt;
-    EditText searchBarTop;
+    ImageView flagIconImg;
+    TextView amountText;
     private Var<Boolean> isPremium;
     private SharedPreferences sharedPreferences;
     ArrayAdapter<String> adapter;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cleverTapAPI = CleverTapAPI.getDefaultInstance(this);
+        cleverTapAPI = CleverTapAPI.getDefaultInstance(getApplicationContext());
         CleverTapAPI.setDebugLevel(CleverTapAPI.LogLevel.VERBOSE);
 
         List<String> searchSuggestions = new ArrayList<>();
@@ -84,8 +86,12 @@ public class MainActivity extends AppCompatActivity {
         //Top Banner Premium
         premiumImages = cleverTapAPI.defineVariable("Hoichoi.premium.premium_banner_img", "str");
         premiumImagesCnt = cleverTapAPI.defineVariable("Hoichoi.premium.premium_banner_cnt", 4);
+        //User Flag and currency
 
+        userFlag = cleverTapAPI.defineVariable("Hoichoi.Currency.flag", "https://i.ibb.co/ccYSMJmD/India.png");
+        userAmt = cleverTapAPI.defineVariable("Hoichoi.Currency.amount", "₹888");
         //You may also like
+
         subTheme = cleverTapAPI.defineVariable("Hoichoi.YMAL.themeData", "str");
 
         //New Additions
@@ -111,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
         genderToggle = findViewById(R.id.gender_toggle);
 
         // Existing elements
-        searchBarTop = findViewById(R.id.search_bar_top);
+        flagIconImg = findViewById(R.id.country_flag);
+        amountText = findViewById(R.id.currency_amount);
         youMayAlsoLike = findViewById(R.id.circular_carousel);
         newAdditions = findViewById(R.id.new_addition_card);
 
@@ -173,21 +180,27 @@ public class MainActivity extends AppCompatActivity {
         JSONObject themeObject = new JSONObject(subTheme.stringValue());
         JSONObject newAdd = new JSONObject(newAddition.stringValue());
         Boolean isPremiumUser = isPremium.value();
+        String flagIcon = cleverTapAPI.getVariable("Hoichoi.Currency.flag").stringValue();
+        String amt = cleverTapAPI.getVariable("Hoichoi.Currency.amount").stringValue();
+
+        Log.d("Flag Icon", flagIcon);
+
 
         if(isPremiumUser) {
 
             try {
 
-                String autoText = themeObject.getString("autoText");
                 String themeColor = themeObject.getString("theme_color");
                 findViewById(R.id.main_layout).setBackgroundColor(Color.parseColor(themeColor));
-                if ("true".equalsIgnoreCase(autoText)) {
-                    AutoCompleteTextView searchBarTop = findViewById(R.id.search_bar_top_auto);
-                    searchBarTop.setVisibility(View.VISIBLE);
-                    searchBarTop.setAdapter(adapter);
-                }else{
-                    findViewById(R.id.search_bar_top).setVisibility(View.VISIBLE);
-                }
+
+                Glide.with(this)
+                        .load(flagIcon)
+                        .into(flagIconImg);
+
+                amountText.setText((CharSequence) amt);
+
+                findViewById(R.id.country_flag).setVisibility(View.VISIBLE);
+                findViewById(R.id.currency_amount).setVisibility(View.VISIBLE);
 
                 JSONObject premiumImages = new JSONObject(cleverTapAPI.getVariable("Hoichoi.premium.premium_banner_img").stringValue());
                 Var<Integer> premiumImagesCnt = cleverTapAPI.getVariable("Hoichoi.premium.premium_banner_cnt");
@@ -268,13 +281,11 @@ public class MainActivity extends AppCompatActivity {
             String themeColor = themeObject.getString("theme_color");
             findViewById(R.id.main_layout).setBackgroundColor(Color.parseColor(themeColor));
 
-            if ("true".equalsIgnoreCase(autoText)) {
-                AutoCompleteTextView searchBarTop = findViewById(R.id.search_bar_top_auto);
-                searchBarTop.setVisibility(View.VISIBLE);
-                searchBarTop.setAdapter(adapter);
-            }else{
-                findViewById(R.id.search_bar_top).setVisibility(View.VISIBLE);
-            }
+            Glide.with(this)
+                    .load("https://i.ibb.co/gZrn3Psb/USA.png")
+                    .into(flagIconImg);
+
+            amountText.setText((CharSequence) amt);
 
             findViewById(R.id.categories).setVisibility(View.VISIBLE);
             findViewById(R.id.circular_carousel).setVisibility(View.VISIBLE);

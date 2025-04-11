@@ -27,31 +27,36 @@
                 android:gravity="center_vertical"
                 android:paddingBottom="10dp">
 
-                <!-- Search Bar -->
-                <EditText
-                    android:id="@+id/search_bar_top"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Search..."
-                    android:drawableStart="@android:drawable/ic_menu_search"
-                    android:padding="10dp"
-                    android:visibility="gone"
-                    android:background="@android:drawable/edit_text"
-                    android:layout_marginLeft="10dp" />
+                    android:orientation="horizontal"
+                    android:background="@drawable/border_box"
+                    android:padding="7dp"
+                    android:visibility="visible">
 
-                <AutoCompleteTextView
-                    android:id="@+id/search_bar_top_auto"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:hint="Search..."
-                    android:drawableStart="@android:drawable/ic_menu_search"
-                    android:padding="10dp"
+                <!-- Country and Amount -->
+                <ImageView
+                    android:id="@+id/country_flag"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:visibility="gone"
-                    android:background="@android:drawable/edit_text"
-                    android:layout_marginLeft="10dp"
-                    android:completionThreshold="1" />
+                    android:contentDescription="Country Flag"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/currency_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/black" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
                 <!-- Toggle Switch (Now on the Right of Search Bar) -->
                 <LinearLayout
