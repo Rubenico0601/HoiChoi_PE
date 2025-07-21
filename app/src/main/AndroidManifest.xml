@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" /> <!-- Recommended so that CleverTap knows when to attempt a network call -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -16,14 +17,29 @@
         android:theme="@style/Theme.HoiChoiPE"
         tools:targetApi="31">
         <activity
+            android:name=".TestingActivity"
+            android:exported="false">
+
+
+        </activity>
+
+        <activity
+            android:name=".IpruActivity"
+            android:exported="false" >
+
+        </activity>
+
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
         <meta-data
             android:name="CLEVERTAP_ACCOUNT_ID"
             android:value="TEST-K9K-Z94-R46Z" />
