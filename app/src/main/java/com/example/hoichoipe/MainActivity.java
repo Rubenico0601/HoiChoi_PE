@@ -36,6 +36,7 @@ import com.bumptech.glide.Glide;
 import com.clevertap.android.sdk.CleverTapAPI;
 import com.clevertap.android.sdk.variables.Var;
 import com.clevertap.android.sdk.variables.callbacks.FetchVariablesCallback;
+import com.clevertap.android.sdk.variables.callbacks.VariablesChangedCallback;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
@@ -165,8 +166,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void handleFetchedVariables() {
         try {
+            cleverTapAPI.addVariablesChangedCallback(new VariablesChangedCallback() {
+                @Override
+                public void variablesChanged() {
+                }
+            });
             Var<String> subTheme = cleverTapAPI.getVariable("Hoichoi.YMAL.themeData");
             Var<String> newAddition = cleverTapAPI.getVariable("Hoichoi.NAdd.themeData");
             Var<Boolean> isPremium = cleverTapAPI.getVariable("Hoichoi.isPremium");

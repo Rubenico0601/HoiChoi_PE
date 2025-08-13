@@ -42,10 +42,10 @@
 
         <meta-data
             android:name="CLEVERTAP_ACCOUNT_ID"
-            android:value="Account_ID" />
+            android:value="TEST-K9K-Z94-R46Z" />
         <meta-data
             android:name="CLEVERTAP_TOKEN"
-            android:value="Token" />
+            android:value="TEST-4c1-3c3" />
         <meta-data
             android:name="CLEVERTAP_USE_GOOGLE_AD_ID"
             android:value="0" />
